@@ -10,29 +10,27 @@
  * };
  */
 class Solution {
-    
-private:
-    void dfs(TreeNode* node,vector<int> &postorder){
-        
-        if(node==NULL) return;
-        
-        dfs(node->left,postorder);
-        
-        dfs(node->right,postorder);
-        
-        postorder.push_back(node->val);
-    }
-    
-    
 public:
     vector<int> postorderTraversal(TreeNode* root) {
         
-        vector<int> postorder;
+        vector<int> ans;
         
-        dfs(root,postorder);
+        postorder( root, ans);
         
-        return postorder;
+        return ans;
         
+    }
+    
+    private:
+    
+    void postorder( TreeNode* root, vector<int> &ans){
         
+        if( root==NULL) return;
+        
+        postorder(root->left,ans);
+        
+        postorder(root->right, ans);
+        
+        ans.push_back(root->val);
     }
 };
