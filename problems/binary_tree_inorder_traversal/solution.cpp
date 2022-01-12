@@ -10,25 +10,36 @@
  * };
  */
 class Solution {
-    private:
-    
-    void dfs(TreeNode* node, vector<int> &inorder){
-        
-        if(node==NULL) return;
-        
-        dfs(node->left,inorder);
-        inorder.push_back(node->val);
-        
-        dfs(node->right,inorder);
-    }
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> inorder;
-        dfs(root,inorder);
         
-        return inorder;
-
+        vector<int> ans;
         
+        inorder( root, ans);
+        
+        return ans;
+        
+    }
+    
+private:
+    
+    void inorder( TreeNode* root, vector<int> &ans){
+        
+        if( root==NULL) return;
+        
+        inorder(root->left,ans);
+        
+        ans.push_back(root->val);
+        
+        inorder( root->right,ans);
         
     }
 };
+
+
+
+
+
+
+
+
