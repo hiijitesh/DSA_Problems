@@ -22,26 +22,26 @@ class Solution {
 public:
     vector<int> preorder(Node* root) {
         
+       
         vector<int> ans;
         
-        preordertrav(root, ans);
+        if(root == NULL) return ans;
         
-        return ans;
+        stack<Node*> st;
+        st.push(root);
         
-    }      
-    
-private :
-    
-    void preordertrav( Node* root, vector<int> &ans){
-        
-        
-        if( root== NULL) return;
-        
-        ans.push_back(root->val);
-        
-        for( auto child:root->children){
+        while(!st.empty()) {
             
-            preordertrav(child, ans);
-        }
+            Node* node = st.top();
+            ans.push_back(node -> val);
+            st.pop();
+            
+            for(int i = (node -> children).size() - 1; i >= 0; i--) {
+                if(node -> children[i] != NULL) {
+                    st.push(node -> children[i]);
+                }
+            }
+        }       
+        return ans;    
     }
 };
