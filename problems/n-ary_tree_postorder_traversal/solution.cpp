@@ -21,30 +21,27 @@ public:
 class Solution {
 public:
     vector<int> postorder(Node* root) {
-        
-        vector<int> ans;
-        
-        postorderTraversal( root, ans);
-        
-        return ans;
-        
-    }
-   private:
-    
-    void postorderTraversal( Node* root, vector<int> &ans){
-        
-        if( root==NULL) return;
-        
        
+        vector<int> result;
+        if(root == NULL) return result;
         
+        stack<Node*> st;
+        st.push(root);
         
-        for ( auto child:root->children){
+        while(!st.empty()) {
             
-            postorderTraversal( child, ans);
+            Node* node = st.top();
+            result.push_back(node -> val);
+            st.pop();
+            
+            for(Node* children: node -> children) {
+                st.push(children);
+            }
+        }
+        
+        reverse(result.begin(), result.end());
+        return result;
+
         
     }
-         ans.push_back( root->val);
-        
-    }
-    
 };
