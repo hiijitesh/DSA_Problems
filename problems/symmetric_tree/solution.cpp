@@ -11,23 +11,18 @@
  */
 class Solution {
 public:
+    
+    bool symtree(TreeNode* root1, TreeNode* root2){
+        
+        if( root1 == NULL && root2 == NULL) return true;
+        
+        if( root1 == NULL || root2 == NULL || root1->val != root2->val) return false;
+            
+        return symtree(root1->left, root2->right) && symtree(root1->right, root2->left);
+    }
     bool isSymmetric(TreeNode* root) {
         
-        return root==NULL || isSymetricHelper(root-> left, root->right);
+        return symtree( root->left, root->right);
         
-        
-    }
-    
-    bool isSymetricHelper(TreeNode* left, TreeNode* right){
-        
-        if(left==NULL || right==NULL)
-            
-            return left==right;
-        
-        if(left->val!=right->val){
-            return false;
-        }
-        
-        return isSymetricHelper(left->left, right->right) && isSymetricHelper(left->right, right->left);
     }
 };
