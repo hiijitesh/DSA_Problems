@@ -1,31 +1,24 @@
 class Solution {
 public:
-    
-    int solve( int m , int n , int row , int col , unordered_map<string, int> &dp){
+    int path(int m, int n, int row , int col, vector<vector<int>> &dp){
         
-        if( col >= n || row >= m ) return 0;
+        if ( row== m-1 && col == n-1) return 1;
         
-        if( row == m-1 && col == n-1) return 1;
+        if ( row >= m || col >= n) return 0;
         
-        string key= to_string(row) +"_"+ to_string(col);
+        if( dp[row][col] != -1 ) return dp[row][col];
         
-        if(dp.find(key) != dp.end()) return dp[key];
+        int down = path( m,n,row+1, col,dp);
         
-        int right = solve( m , n , row , col+1,dp);
+        int right = path( m,n, row, col+1,dp);
         
-        int down = solve( m,n,row+1,col,dp);
-        
-        return dp[key]=right+down;
-        
-        
-        
-        
+        return dp[row][col] = down+right;
     }
     int uniquePaths(int m, int n) {
         
-        unordered_map<string, int> dp;
+        vector<vector<int>> dp(101, vector<int> (101,-1));
         
-        return solve( m, n,0,0,dp);
+        return path( m, n, 0, 0,dp);
         
     }
 };
