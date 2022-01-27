@@ -1,31 +1,31 @@
 class Solution {
 public:
-    
-    int solve( vector<vector<int>>& obstacleGrid, int row, int col,int m , int n, unordered_map<string,int>&dp){
+    int pathSum( int row, int col, int m, int n, vector<vector<int>>  &obstacleGrid, vector<vector<int>> &dp){
         
-        if( col >= n || row >= m || obstacleGrid[row][col] ) return 0;
+        if(obstacleGrid[0][0]== 1 || obstacleGrid[m-1][n-1] == 1 ) return 0;
         
         if( row == m-1 && col == n-1) return 1;
-                
-        string key= to_string(row) +"_"+ to_string(col);
         
-        if(dp.find(key) != dp.end()) return dp[key];
+        if( row >=m || col >= n ||  obstacleGrid[row][col] == 1 ) return 0;
         
-        int right = solve(obstacleGrid,row,col+1,m,n,dp);
-        int down =  solve(obstacleGrid,row+1,col,m,n,dp);
+        if ( dp[row][col] != -1) return dp[row][col];
         
-        return dp[key] = right+ down;
-
+        int right = pathSum(row, col+1, m,n, obstacleGrid,dp);
+        int down = pathSum( row+1, col, m,n, obstacleGrid,dp);
+        
+        return dp[row][col] = right+down;  
+        
         
     }
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
+        vector<vector<int>> dp( 101 , vector<int> (101,-1));
         
-        unordered_map<string,int> dp;
+        int m=  obstacleGrid.size();
         
-        return solve(obstacleGrid,0,0,m,n,dp);
+        int n= obstacleGrid[0].size();
         
+        
+        return pathSum( 0,0,m,n,obstacleGrid,dp);
     }
 };
