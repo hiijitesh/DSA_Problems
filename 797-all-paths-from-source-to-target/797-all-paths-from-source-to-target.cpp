@@ -30,8 +30,8 @@ public:
         visited[currNode]=1;
         currPath.push_back(currNode);
         
-        for ( auto neighour:graph[currNode]){
-            sourceToPath(graph,neighour,n, visited,currPath, ans);
+        for ( auto neighbour:graph[currNode]){
+            sourceToPath(graph,neighbour,n, visited,currPath, ans);
         }
         visited[currNode]=0;
         currPath.pop_back();
