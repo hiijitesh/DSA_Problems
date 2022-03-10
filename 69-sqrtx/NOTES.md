@@ -1,0 +1,1 @@
+This Problem is variant of Floor Problem in Binary Search
