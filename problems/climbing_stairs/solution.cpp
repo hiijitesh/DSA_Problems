@@ -1,33 +1,23 @@
 class Solution {
-// private:
-public: 
-    
-    int totalways( int currIndex, int target, vector<int> &dp){
-        
-        
-        if( currIndex==target) return 1;        
-        if(currIndex> target) return 0;
-        
-        if ( dp[currIndex] != -1 ) return dp[currIndex];
-        
-        // if(mp.find(currKey) != mp.end()) return mp[currKey];
-        
-        int oneStep= totalways( currIndex+1, target,dp);
-        int twoStep= totalways(currIndex+2, target,dp);
-        
-        return dp[currIndex]= oneStep+twoStep;
-
-    }
+public:
    
     int climbStairs(int n) {
         
-        // unordered_map<int,int> mp;
+        int dp[n+1];
+            
+        if (n == 1)  return 1;
+        if (n == 2)  return 2;
         
-        vector<int> dp( n+1, -1);
+         dp[0]=0;
+         dp[1]=1;
+         dp[2]=2;
         
-        return totalways( 0, n,dp);
+        for( int i =3; i<= n ; i++)
+        {
+            dp[i]= dp[i-2] + dp[i-1];
+        }
         
-       
+        return dp[n];
         
     }
 };
