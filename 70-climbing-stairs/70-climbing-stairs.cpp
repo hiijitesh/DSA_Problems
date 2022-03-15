@@ -1,22 +1,25 @@
 class Solution {
 public:
-    int totalWays( int n, int currStair, vector<int> &dp){
-        
-        if ( currStair == n) return 1;
-        
-        if( currStair > n) return 0;
-        
-        if( dp[currStair] != -1) return dp[currStair];
-        
-        int oneStep = totalWays(n, currStair+1, dp);
-        int twoStep = totalWays(n, currStair+2, dp);
-        
-        return dp[currStair] = oneStep+twoStep;
-        
-    }
+   
     int climbStairs(int n) {
-        vector<int> dp(n+1,-1);
-        return totalWays ( n,0,dp);
+        
+        vector<int> dp(n+1, 0);
+            
+        if (n == 1)  return 1;
+           
+   
+        if (n == 2)  return 2;
+        
+         dp[0]=0;
+         dp[1]=1;
+         dp[2]=2;
+        
+        for( int i =3; i<= n ; i++)
+        {
+            dp[i]= dp[i-2] + dp[i-1];
+        }
+        
+        return dp[n];
         
     }
 };
