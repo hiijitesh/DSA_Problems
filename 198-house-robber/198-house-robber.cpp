@@ -1,25 +1,22 @@
 class Solution {
 public:
-    
-    int maximumMoney ( vector<int> &nums, int currIndex, vector<int> &dp){
-        
-        if( currIndex >= nums.size()) return 0;
-        
-        //we have two choice either we can rob that particular house or not
-        // if we did robed it then we cant rob adjecent house
-        //if we didnt robed it then we can adjacent house
-        
-        if(dp[currIndex] != -1) return dp[currIndex];
-        
-        int robbed = nums[currIndex] + maximumMoney(nums, currIndex+2, dp);
-        
-        int notRobbed = maximumMoney(nums, currIndex+1, dp);
-        
-        return dp[currIndex] = max ( robbed, notRobbed);
-    }
     int rob(vector<int>& nums) {
         
-        vector<int> dp ( 102, -1);
-        return maximumMoney ( nums, 0, dp) ;
+        int n= nums.size();
+        int dp[n+1];
+        
+        if( n <1 ) return 0;
+        if( n <2 ) return nums[0];
+        
+        dp[0] = nums[0];
+        dp[1] = max(dp[0], nums[1]);
+        
+        for( int i=2; i<n; i++){
+            //in first para what i did is i robbed that house so back of minus 2 house will also had robed, in second paara i assume that i have not robbed that house so just adjecnt back will get robbed
+            dp[i] = max( nums[i] + dp[i-2], dp[i-1]);
+        }
+        return dp[n-1];
+        
+        
     }
 };
