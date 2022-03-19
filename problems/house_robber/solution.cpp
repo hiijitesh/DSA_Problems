@@ -1,21 +1,22 @@
 class Solution {
 public:
-    int maxRobbedMoney( vector<int> &nums, int currHouse, vector<int> &dp){
-        
-         if( currHouse >= nums.size()) return 0;
-        
-         if( dp[currHouse] != -1) return dp[currHouse];
-        
-         int robbed= nums[currHouse] + maxRobbedMoney(nums,currHouse+2, dp);  
-         int notRobbed = maxRobbedMoney(nums, currHouse+1, dp);
-        
-         return dp[currHouse] = max(robbed, notRobbed);
-    }
     int rob(vector<int>& nums) {
         
-        vector<int> dp(102,-1);
+        int n= nums.size();
+        int dp[n+1];
         
-        return maxRobbedMoney( nums, 0, dp);
+        if( n <1 ) return 0;
+        if( n <2 ) return nums[0];
+        
+        dp[0] = nums[0];
+        dp[1] = max(dp[0], nums[1]);
+        
+        for( int i=2; i<n; i++){
+            //in first para what i did is i robbed that house so back of minus 2 house will also had robed, in second paara i assume that i have not robbed that house so just adjecnt back will get robbed
+            dp[i] = max( nums[i] + dp[i-2], dp[i-1]);
+        }
+        return dp[n-1];
+        
         
     }
 };
