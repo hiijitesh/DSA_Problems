@@ -1,49 +1,39 @@
 class Solution {
 public:
-    
-    bool solve( vector<int> & nums , int ci, int target, unordered_map<string,bool> &dp){
-        
-         // if ( target == 0 ) return true; 
-        if ( target == 0) return true;
-        
-        if( ci >= nums.size()) return false;
-        
-        string key= to_string(ci)+"_"+to_string(target);
-        
-        if ( dp.find(key) !=dp.end() ) return dp[key];
-        
-        bool consider = false;
+    bool ifPossible(vector<int>& nums,int currentIndex,int sum,unordered_map<string,bool> &m){
        
-        if ( target >= nums[ci]){
-            
-            consider = solve (nums, ci+1,target-nums[ci],dp);
-            
-        }
-        //why u added this line
+       if( sum==0)
+         return true; 
+       if(currentIndex >= nums.size())
+         return false;  
+       
+       string current_key=to_string(currentIndex)+"-"+to_string(sum);
+       if(m.find(current_key)!=m.end())
+       return m[current_key];
         
-         if(consider){
-             dp[key] = consider;
+       bool include =  false;
+        if(sum >= nums[currentIndex]){
+             include = ifPossible(nums,currentIndex+1,sum-nums[currentIndex],m);
+        }
+        
+         if(include){
+             m[current_key] = include;
             return true;
         }
         
-        bool notconsider = solve( nums, ci+1, target,dp);
+       bool exclude = ifPossible(nums,currentIndex+1,sum,m);  
         
-        return dp[key] = consider || notconsider;
-         
-         // return dp[ci][target];
-        
+       return m[current_key]=(include || exclude);  
     }
     bool canPartition(vector<int>& nums) {
+        int sum=0;
+        for(auto i:nums)
+          sum+=i;
         
-        unordered_map<string,bool> dp;
+        if(sum%2!=0)
+          return false;
         
-        int target= accumulate(nums.begin(), nums.end(),0);
-        
-        // cout<<target;
-        
-        if ( target % 2 != 0) return false;
-        
-        return solve( nums,0,target/2,dp);
-        
+        unordered_map<string,bool> m;
+        return ifPossible(nums,0,sum/2,m);
     }
 };
