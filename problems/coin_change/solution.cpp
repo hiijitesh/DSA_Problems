@@ -1,43 +1,33 @@
 class Solution {
-public:    
-   int mincoin( vector<int> & coins, int currIndex, int amount ,vector<vector<int>> &dp){
-       
-      // unordered_map<string, int> mp;
+    
+private:
+    int minCoin(vector<int> &coins, int amount, int currCoin, vector<vector<int>> &dp)
+    {
+        if(currCoin >= coins.size()) return 100000;
+        if(amount == 0) return 0;
         
-        if( amount == 0 ) return 0;
+        if(dp[currCoin][amount] != -1) return dp[currCoin][amount];
         
-        if( currIndex >= coins.size()) return 100000;
-              
-       int includePos =100000;
-       
-      if( dp[currIndex][amount] != -1) return dp[currIndex][amount];
-       
-       // if(mp.find(currKey) != mp.end()) return mp[currKey];
-       
-        if (coins[currIndex] <= amount){
+        int consider = 100000;
+        if(coins[currCoin] <= amount){
             
-             includePos = 1 + mincoin( coins,currIndex,amount-coins[currIndex],dp);                  
+            consider = 1 + minCoin(coins, amount-coins[currCoin],currCoin, dp);
         }
         
-        int excludePos = mincoin( coins,currIndex+1,amount,dp);
+        int notConsider = minCoin(coins, amount, currCoin+1, dp);
         
-      return dp[currIndex][amount]= min(includePos, excludePos);    
-       
+        return dp[currCoin][amount] = min(consider, notConsider);
+    }
+public:
+    int coinChange(vector<int>& coins, int amount) {
+     
+        vector<vector<int>> dp(13, vector<int> (amount+1, -1));
+        int ans =  minCoin(coins, amount, 0, dp);
+        
+        if( ans >= 100000) return -1; 
+            
+        else return ans;
         
     }
-                
-    int coinChange(vector<int>& coins, int amount) {  
-        
-        vector<vector<int>> dp( coins.size()+1, vector<int> (amount+1,-1));
-        
-        int ans = mincoin(coins, 0,amount ,dp);
-        
-        if( ans >= 100000) {
-            return -1;
-        }
-        else{
-            return ans;
-        } 
-        
-    }
+    
 };
