@@ -21,7 +21,7 @@ private:
     }
 public:
     int maxProfit(int k, vector<int>& prices) {
-        vector<vector<vector<int>>>dp(prices.size()+1,vector<vector<int>>(2,vector<int>(101,-1)));
+        vector<vector<vector<int>>>dp(prices.size()+1,vector<vector<int>>(2,vector<int>(k+1,-1)));
         return totalProfit(prices, 0, true, k, dp);
         
     }
