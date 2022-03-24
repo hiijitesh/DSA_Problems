@@ -3,7 +3,7 @@ private:
     int totalProfit(vector<int> &prices, int currDay, bool canBuy, int TxnCount, vector<vector<vector<int>>> &dp){
         
         if(currDay >= prices.size()) return 0;
-        if(TxnCount == 0) return 0;
+        if(TxnCount <= 0) return 0;
         if(dp[currDay][canBuy][TxnCount] != -1) return dp[currDay][canBuy][TxnCount];
         
         int idle = totalProfit(prices, currDay+1, canBuy, TxnCount, dp);
