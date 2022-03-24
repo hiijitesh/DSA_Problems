@@ -12,9 +12,9 @@ class Solution
     {
         vector<int> dp(n+1, -1);
         // your code here
-        int ans = totalWays(n, dp);
+        return totalWays(n, dp);
         
-        return ans % 1000000007;
+        // return ans % 1000000007;
         
     }
     private:
