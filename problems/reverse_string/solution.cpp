@@ -3,6 +3,14 @@ public:
     void reverseString(vector<char>& s) {
         
         
+        
+//         Recursive solution
+        
+        
+        
+//         This is iterative solution
+        
+        
        int i=0, j=s.size()-1;
         
         while(i<j){
@@ -10,7 +18,7 @@ public:
             swap(s[i++], s[j--]);
         }
         
-        // return s;
+
         
         
     }
