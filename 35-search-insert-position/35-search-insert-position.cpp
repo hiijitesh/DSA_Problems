@@ -20,12 +20,13 @@ public:
             {
                 
                  ans= mid;
-                end = mid-1;
+                 end = mid-1;
                 
             }
-            else{
+            else
+            {
                              
-                start = mid +1;
+                 start = mid +1;
 
             }
                
