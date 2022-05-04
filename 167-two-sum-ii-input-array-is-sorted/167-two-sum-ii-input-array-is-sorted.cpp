@@ -11,7 +11,8 @@ public:
             int sum = nums[i] + nums[j];
             
             if(sum == target){
-               return {i+1, j+1};
+               vector<int>ans {i+1, j+1};
+                return ans;
             }
             
             if( sum > target){
@@ -21,7 +22,7 @@ public:
                 i++;
         }
         
-        return {};
+        return ans;
         
     }
 };
