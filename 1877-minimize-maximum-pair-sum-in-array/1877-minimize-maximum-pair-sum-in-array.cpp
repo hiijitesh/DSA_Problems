@@ -8,8 +8,8 @@ public:
         
         while(left < right)
         {
-            int sum = nums[left] + nums[right];
-            ans = max(ans, sum);
+            // int sum = nums[left] + nums[right];
+            ans = max(ans, (nums[left] + nums[right]));
             left++;
             right--;
         }
