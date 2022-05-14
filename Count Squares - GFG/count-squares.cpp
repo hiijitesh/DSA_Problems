@@ -7,6 +7,7 @@ class Solution {
   public:
     int countSquares(int N) {
         // code here
+        /*
         int cnt = 0;
         
         for(int i = 1; i*i<N; i++){
@@ -15,6 +16,11 @@ class Solution {
             
         }
         return cnt;
+        
+        */
+        //another method is 
+        
+        return sqrt(N-1);
     }
 };
 
