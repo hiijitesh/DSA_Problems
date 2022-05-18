@@ -10,62 +10,62 @@
  * };
  */
 class Solution {
-private:
-    TreeNode* findLeftMost(TreeNode* currNode){
+    private:
+    TreeNode* leftMostNode(TreeNode *curr){
         
-        while(currNode->left != NULL){
-            currNode=currNode->left;
+        while(curr->left != NULL){
+            curr = curr->left;
         }
-        return currNode;
+        
+        return curr;
     }
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
         
-         if( root == NULL) return NULL;  
+        if(root == NULL) return NULL;
         
-         if( key< root->val){
-            root->left =deleteNode( root->left, key);
+        if(root->val > key){
+            root->left = deleteNode(root->left, key);
             return root;
         }
-        
-        else if( key > root->val){
-            
-            root->right= deleteNode(root->right, key);
+        else if(root->val < key){
+            root->right = deleteNode(root->right, key);
             return root;
+ 
         }
-        else{
-            
-            if( root->left == NULL && root->right == NULL){
-                 root = NULL;
-                return root;
-                
-            }
-               
-                
-            if( root->left != NULL && root->right ==NULL){
-                 root= root->left;
-               return root;
-                
-            }
-               
-            if( root->right != NULL && root->left == NULL){
-                 root= root->right;
+        else if( root->val == key)
+        {
+          //wether its leaf node or not
+            if(root->left == NULL and root->right == NULL ){
+                root = NULL;
                 return root;
             }
-               
-            // TreeNode *rightNode = root->right;
-            //goto the most left side of a right side of key
-            TreeNode  * tempNode= findLeftMost(root->right);
             
-            //swap the node
-            int temproot= root->val;
-            root->val =tempNode->val;
-            tempNode->val=temproot;
+            // if there is one leaf node in left
+            if(root->left != NULL && root->right == NULL){
+                root = root->left;
+                return root;
+                    
+            }
+            // if there is one leaf node in the right
+            if(root->right != NULL && root->left == NULL){
+                root = root->right ;
+                return root;
+            }
             
-            //calling the function to delete right subtree
+            
+            // at this point our target node in not a leaf node so for tha
+            // we will 
+            TreeNode* tempNode = leftMostNode(root->right);
+            
+            int tempRoot = root->val;
+            root->val = tempNode->val;
+            tempNode->val = root->val;
+            
             root->right = deleteNode(root->right, tempNode->val);
             return root;
-        }  
-        return root;   
+        }
+        return root;
+        
     }
 };
