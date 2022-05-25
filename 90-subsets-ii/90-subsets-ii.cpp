@@ -29,14 +29,17 @@ private:
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         
+        //here we took set of vectors so that we can avoid the duplicate subset ok
         set<vector<int>> result;
         
         vector<int> currentSet;
         
+        //we need to sort the nums array so that it would be easy to filter duplicate subsets
         sort(nums.begin(), nums.end());
         
         generateAllSubsets(nums, 0, currentSet, result);
         
+        // but we have to return the ans in form of vector of vector so that we converted our set into vector 
         vector<vector<int>> ans(result.begin(), result.end());
         return ans;
     }
