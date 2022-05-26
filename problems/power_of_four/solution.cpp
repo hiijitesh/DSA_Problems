@@ -2,15 +2,12 @@ class Solution {
 public:
     bool isPowerOfFour(int n) {
         
-        if(n<=0) return false;
+        //Base case
         
-        if(n==1) return true;
+        if(n == 1) return true;
         
-        if(n%4==0)
-            return isPowerOfFour(n/4);
+        if(n <= 0 or n % 4 != 0) return false;
         
-        else
-            return false;
-        
+        return isPowerOfFour(n / 4);
     }
 };
