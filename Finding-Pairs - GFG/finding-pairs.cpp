@@ -9,11 +9,13 @@ class Solution{
 public:	
 	
 
+
 int count_pairs(vector<char> &arr, string &s,int n,int m){
-    // Complete the function
+    unordered_map<char, int> map;
+    for(char ch : s) map[ch]++;
     int count = 0;
-    for(int i=0;i<n;i+=2){
-        if(s.find(arr[i]) != string::npos && s.find(arr[i+1]) != string::npos) count++;
+    for(int i = 0; i<n; i+=2){
+        if(map.count(arr[i]) && map.count(arr[i+1])) count++;
     }
     return count;
 }
