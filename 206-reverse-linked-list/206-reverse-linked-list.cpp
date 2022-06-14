@@ -18,7 +18,7 @@ public:
         
         if(currNode->next == nullptr){
             
-             return head;
+             return currNode;
         }
         
         ListNode* newNode = reverseList(currNode->next);
