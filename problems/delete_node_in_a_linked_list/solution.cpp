@@ -10,10 +10,15 @@ class Solution {
 public:
     void deleteNode(ListNode* node) {
         
-        ListNode* swapNode = node->next;
-        node->val= swapNode->val;
+        //swaping the target node value with previous node value
+        int temp = node->val;
+        node->val = node->next->val;
+        node->next->val = temp;
+        
+        // delete the target node by linking prev node of target node with  nextNode of target node
+        
         node->next = node->next->next;
-
+        return;
         
     }
 };
