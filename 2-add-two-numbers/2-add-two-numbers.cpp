@@ -21,10 +21,23 @@ public:
         int carry = 0;
         int total = 0, firstNum = 0, secondNum = 0;
         
-        while(l1 != nullptr and l2 != nullptr)
+        while(l1 != nullptr or l2 != nullptr)
         {
-            firstNum = l1->val;
-            secondNum = l2->val;
+           
+            if(l1){
+               
+                firstNum = l1->val;
+            }
+            else
+                firstNum = 0;
+            
+            if(l2){
+                
+                 secondNum = l2->val;
+            }
+            else
+                secondNum = 0;
+           
             
             total = firstNum + secondNum + carry;
             
@@ -39,48 +52,18 @@ public:
             dummyNode->next = newNode;
             //now moving to the next node in both LL
             dummyNode = dummyNode->next;
-            l1 = l1->next;
-            l2 = l2->next;
+            if(l1){
+                l1 = l1->next;
+            }
+            if(l2){
+                
+                l2 = l2->next;
+            }
+            
+            
             
         }
-        //it might be happen that one of the LL is got finish firsta and
-        //second one got left
         
-        while(l2 != nullptr){
-            
-            total = l2->val + carry;
-            
-            carry  = total / 10;
-            total %= 10;
-            
-            ListNode* newNode = new ListNode(total);
-            
-            // dummyNode = newNode;
-            dummyNode->next = newNode;
-            
-            //move 
-            dummyNode = dummyNode ->next;
-            l2 = l2->next;
-        }
-        
-        //if l1 is empty
-        
-         while(l1 != nullptr){
-            
-            total = l1->val + carry;
-            
-            carry  = total / 10;
-            total %= 10;
-            
-            ListNode* newNode = new ListNode(total);
-            
-            // auto dummyNode = new Node(-1);
-            dummyNode->next = newNode;
-            
-            //move 
-            dummyNode = dummyNode ->next;
-            l1 = l1->next;
-        }
         
         if(carry == 1){
             
