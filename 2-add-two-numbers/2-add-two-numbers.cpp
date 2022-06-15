@@ -15,13 +15,13 @@ public:
         ListNode* dummyNode = new ListNode(-1);
         ListNode* head = dummyNode;
         
-        if(l1 == nullptr) return l2;
-        if(l2 == nullptr) return l1;
+        if(!l1) return l2;
+        if(!l2 ) return l1;
         
         int carry = 0;
         int total = 0, firstNum = 0, secondNum = 0;
         
-        while(l1 != nullptr or l2 != nullptr)
+        while(l1  or l2)
         {
            
             if(l1){
@@ -58,13 +58,9 @@ public:
             if(l2){
                 
                 l2 = l2->next;
-            }
-            
-            
-            
+            }    
         }
-        
-        
+
         if(carry == 1){
             
             ListNode* newNode = new ListNode(1);
