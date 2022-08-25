@@ -1,21 +1,28 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        
+        vector<vector<int>> ans;
+        
+        if(intervals.size() == 0) return ans;
+        
         sort(intervals.begin(), intervals.end());
-
-        vector<vector<int>> merged;
-        for (auto interval : intervals) {
-            // if the list of merged intervals is empty or if the current
-            // interval does not overlap with the previous, simply append it.
-            if (merged.empty() || merged.back()[1] < interval[0]) {
-                merged.push_back(interval);
+        
+        ans.push_back(intervals[0]);
+        
+        int  j = 0;
+        for(int curr = 1 ; curr< intervals.size(); curr++){
+            
+            //overlaping
+            if(intervals[curr][0] <= ans[j][1]){
+                ans[j][1] = max(ans[j][1], intervals[curr][1]);
+                
             }
-            // otherwise, there is overlap, so we merge the current and previous
-            // intervals.
-            else {
-                merged.back()[1] = max(merged.back()[1], interval[1]);
+            else{
+                j++;
+                ans.push_back(intervals[curr]);
             }
         }
-        return merged;
+     return ans;   
     }
 };
