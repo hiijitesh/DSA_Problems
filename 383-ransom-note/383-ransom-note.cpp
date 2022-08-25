@@ -1,17 +1,23 @@
 class Solution {
 public:
-    bool canConstruct(string a, string b) {
+    bool canConstruct(string ransomNote, string magazine) {
+        
         map<char, int> mp;
         
-        for(int i=0; i<b.length(); i++) {
-            mp[b[i]]++;
+        for(auto x : magazine){
+            mp[x]++;
         }
         
-        for(int i=0; i<a.length(); i++) {
-            if(mp[a[i]]>0) mp[a[i]]--;
-            else return false;
+        for(auto y :ransomNote){
+            
+            if(mp[y] > 0){
+                mp[y]--;
+                
+            }
+            else{
+                return false;
+            }
         }
-        
         return true;
     }
 };
