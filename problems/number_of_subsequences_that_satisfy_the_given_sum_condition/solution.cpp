@@ -1,38 +1,26 @@
 class Solution
 {
     public:
-
-    int mod = 1e9 + 7;
-    
-    int numSubseq(vector<int> &a, int k)
+        int mod = 1000000007;
+    int numSubseq(vector<int> &nums, int target)
     {
-        vector<int> twopower
-        { 1 };	//precompute pow of 2 
-
-        for (int i = 0; i < a.size(); i++)
+        sort(nums.begin(), nums.end());
+        int res = 0, n = nums.size(), i = 0, j = n - 1;
+        vector<int> pow2(n + 1, 1);
+        for (int i = 1; i <= n; i++)
         {
-            twopower.push_back((twopower.back() *2) % mod);
+            pow2[i] = (2 *pow2[i - 1]) % mod;
         }
-
-        sort(begin(a), end(a));
-        int ans = 0;
-
-        int i = 0, j = a.size() - 1;
-
         while (i <= j)
         {
-
-            if (a[i] + a[j] > k)
+            if (nums[j] + nums[i] <= target)
             {
-                j--;
-            }
-            else
-            {
-                int rem = j - i, r = 0;
-                ans = (ans + twopower[rem]) % mod;
+                res = (res + pow2[j - i]) % mod;
                 i++;
             }
+            else
+                j--;
         }
-        return ans;
+        return res;
     }
 };
