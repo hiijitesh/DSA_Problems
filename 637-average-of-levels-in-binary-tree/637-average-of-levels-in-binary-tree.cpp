@@ -20,23 +20,23 @@ public:
         
         while(!q.empty())
         {
-            int size = q.size();
+            int currSize = q.size();
             
             long sum = 0;
             
-         for(int i = 0; i < size; i++)
-            {
-                TreeNode* node = q.front();
+            for(int i = 0; i < currSize; i++){
+                
+                TreeNode* currNode = q.front();
                 q.pop();
                 
-                if(node->left) q.push(node->left);
+                if(currNode -> left) q.push(currNode -> left);
+                if(currNode -> right) q.push(currNode -> right);
                 
-                if(node->right) q.push(node->right);
+                sum += currNode -> val;
                 
-                sum = sum + node->val;
-                // size--;
             }
-            ans.push_back((double)sum/size);
+            
+            ans.push_back((double)sum/currSize);
         }
         return ans;
     }
