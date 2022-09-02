@@ -9,78 +9,39 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-// class Solution {
-// public:
-//     vector<vector<int>> levelOrder(TreeNode* root) {
-        
-//         vector<vector<int>> ans;
-        
-//         queue<TreeNode*> q;
-        
-//         if( root != NULL) return ans;
-        
-//         q.push(root);
-        
-//         while(!q.empty()){
-            
-//             int currSize = q.size();
-            
-//             vector<int> level;
-            
-//             while(currSize >0){
-                
-//                 TreeNode* currNode= q.front();
-//                 q.pop();
-                
-//                 level.push_back(currNode->val);
-                
-//                 if(currNode->left != NULL)
-//                      q.push(currNode->left);
-                
-//                 if(currNode->right != NULL)
-//                     q.push(currNode->right);
-                
-//                 currSize--;
-//             }
-            
-//             ans.push_back(level);
-//         }
-        
-//         return ans;
-        
-//     }
-// };
-
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>>nodes;
+    vector<vector<int>> levelOrder(TreeNode* root) 
+    {
+     
+        vector<vector<int>>ans;
         
-        if(root ==NULL) return nodes;
+        if(!root) return ans;
         
-        queue<TreeNode*>q;
+        queue<TreeNode*> q;
         q.push(root);
         
-        while(!q.empty()){
-            int currentSize = q.size();
-            vector<int>levelNodes;
-            while(currentSize > 0){
-                TreeNode* currentNode = q.front();
+        while(!q.empty())
+        {
+            int currSize = q.size();
+            vector<int> res;
+            
+            while(currSize > 0)
+            {
+                TreeNode* currNode = q.front();
                 q.pop();
                 
-                //Add to levelNode
-                levelNodes.push_back(currentNode->val);
+                res.push_back(currNode->val);
                 
-                if(currentNode->left != NULL)
-                    q.push(currentNode->left);
-                if(currentNode->right != NULL)
-                    q.push(currentNode->right);
+                if(currNode->left) q.push(currNode->left);
+                if(currNode->right) q.push(currNode->right);
                 
-                currentSize--;
+                currSize--;
             }
-            nodes.push_back(levelNodes);
+            ans.push_back(res);
+            
         }
+        return ans;
         
-        return nodes;
     }
 };
