@@ -3,7 +3,7 @@ public:
     
     void dfs(int num, int n, int k, vector<int> &ans)
     {
-        if(n == 0)
+        if(n == 1)
         {
             ans.push_back(num);
             return;
@@ -24,7 +24,7 @@ public:
         
         for(int i = 1; i <10; i++)
         {
-            dfs(i, n-1, k , ans);
+            dfs(i, n, k , ans);
         }
         return ans;
     }
