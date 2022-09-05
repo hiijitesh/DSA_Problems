@@ -18,62 +18,40 @@ public:
 };
 */
 
-class Solution {
-public:
-    vector<vector<int>> levelOrder(Node* root) {
-        vector<vector<int>>nodes;
-        
-        if(root ==NULL) return nodes;
-        
-        queue<Node*>q;
-        q.push(root);
-        
-        while(!q.empty()){
-            int currentSize = q.size();
-            vector<int>levelNodes;
-            while(currentSize > 0){
-                Node* currentNode = q.front();
-                q.pop();
-                
-                //Add to levelNode
-                levelNodes.push_back(currentNode->val);
-                for (Node* child : currentNode->children){
-                    
-                    q.push(child);
+class Solution
+{
+    public:
+        vector<vector < int>> levelOrder(Node *root)
+        {
+            vector<vector < int>> nodes;
+
+            if (root == NULL) return nodes;
+
+            queue<Node*> q;
+            q.push(root);
+
+            while (!q.empty())
+            {
+                int currentSize = q.size();
+                vector<int> levelNodes;
+                while (currentSize > 0)
+                {
+                    Node *currentNode = q.front();
+                    q.pop();
+
+                   	//Add to levelNode
+                    levelNodes.push_back(currentNode->val);
+                    for (Node *child: currentNode->children)
+                    {
+
+                        q.push(child);
+                    }
+
+                    currentSize--;
                 }
-                
-                currentSize--;
+                nodes.push_back(levelNodes);
             }
-            nodes.push_back(levelNodes);
+
+            return nodes;
         }
-        
-        return nodes;
-        
-    }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
