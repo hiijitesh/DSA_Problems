@@ -3,20 +3,15 @@ class Solution
     public:
         int maxSubArray(vector<int> &nums)
         {
-            int currSum = nums[0];
-            int oSum = nums[0];
+            int oSum = INT_MIN;
+            int currSum = 0;
             
-            for(int i = 1; i < nums.size(); i++)
+            for (auto it: nums)
             {
-                if(currSum >=0)
-                    currSum += nums[i];
-                else
-                    currSum = nums[i];
-                
-                if(currSum > oSum)
-                    oSum = currSum;
+                currSum += it;
+                oSum = max(currSum, oSum);
+                if (currSum < 0) currSum = 0;
             }
-            
             return oSum;
         }
 };
