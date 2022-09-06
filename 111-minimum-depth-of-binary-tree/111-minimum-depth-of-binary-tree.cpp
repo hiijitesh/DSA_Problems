@@ -4,25 +4,24 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
-https://assets.leetcode.com/uploads/2020/10/12/ex_depth.jpg *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
 public:
-    int minDepth(TreeNode* root) 
-    {
+    int minDepth(TreeNode* root) {
         
         if(root == NULL)
             return 0;
-        if(root->left == NULL and root->right == NULL) 
-            return 1;
-        if(root->left == NULL)
-            return 1 + minDepth(root->right);
-        if(root->right == NULL)
-            return 1 + minDepth(root->left);
+        
+        int minLeft = minDepth(root->left);
+        int minRight = minDepth(root->right);
+        
+        if(minLeft == 0 or minRight == 0)
+            return max(minLeft, minRight)+1; 
             
-         return 1 + min(minDepth(root->left), minDepth(root->right));
+        return min(minLeft, minRight)+1;
     }
 };
