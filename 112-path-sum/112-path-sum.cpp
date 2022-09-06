@@ -13,7 +13,7 @@ class Solution {
 public:
     bool solve(TreeNode* root, int key, int currSum)
     {
-        if(root == NULL) return 0;
+        if(root == NULL) return false;
         
         if(root->left == NULL and root->right == NULL)
                 return currSum + root->val == key;
