@@ -17,7 +17,9 @@ public:
         
         if(root->left == NULL and root->right == NULL)
                 return currSum + root->val == key;
+        
         bool leftTree = solve(root->left, key, currSum+root->val);
+        
         bool rightTree = solve(root->right, key, currSum+root->val);
         
         return leftTree or rightTree;
