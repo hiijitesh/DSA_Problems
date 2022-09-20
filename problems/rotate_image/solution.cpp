@@ -1,22 +1,20 @@
 class Solution {
 public:
-    void rotate(vector<vector<int>>& mat) {
+    void rotate(vector<vector<int>>& matrix) {
         
-        int n = mat.size();
+        int m = matrix.size();
+        int n = matrix[0].size();
         
-        for(int row = 0; row < n; row++){
-            
-            for(int col = 0; col < row; col++){
-                
-                swap(mat[row][col], mat[col][row]);
+        for(int row = 0; row < m; row++)
+        {
+            for(int col = row+1; col < m; col++)
+            {
+                swap(matrix[row][col], matrix[col][row]);
             }
         }
         
         
-        //now reverse the matrix so that it can be rotated by 90 degree
-        for(int i = 0; i < n ; i++){
-
-            reverse(mat[i].begin(), mat[i].end());
-        }
+        for(int row = 0; row < m; row++)
+            reverse(matrix[row].begin(), matrix[row].end());
     }
 };
