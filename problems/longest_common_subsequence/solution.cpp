@@ -1,34 +1,38 @@
 class Solution {
 public:
-    int getLCS(string &s1, string &s2, int i, int j, int m, int n,  vector<vector<int>>&dp)
+    int longestCommonSubsequence(string s1, string s2) 
     {
-        if(i>= m or j >= n)
-            return 0;
-        if(dp[i][j] != -1)
-            return dp[i][j];
-        
-        int ans = 0;
-        if(s1[i] == s2[j])
-        {
-              ans =  1 + getLCS(s1, s2, i+1, j+1, m, n,dp);
-        }
-          
-        else
-        {
-            int firstCase = getLCS(s1, s2, i+1, j, m, n, dp);
-            int secondCase = getLCS(s1, s2, i, j+1, m, n, dp);
-            
-            ans = max(firstCase, secondCase);
-        }
-        
-        return dp[i][j] = ans;
-    }
-    int longestCommonSubsequence(string s1, string s2) {
         
         int m = s1.size();
         int n = s2.size();
-        vector<vector<int>>dp(m+1, vector<int>(n+1, -1));
-        return getLCS(s1, s2, 0, 0, m, n, dp);
+        
+        int dp[m+1][n+1];
+        for(int i = 0; i < m+1; i++)
+        {
+            for(int j = 0; j < n+1; j++)
+            {
+                if(i == 0 or j == 0)
+                    dp[i][j] = 0;
+            }
+        }
+        
+        
+        for(int i = 1; i <m+1; i++)
+        {
+            for(int j = 1; j <n+1; j++)
+            {
+                if(s1[i-1] ==s2[j-1])
+                {
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                }
+                
+                else
+                {
+                    dp[i][j] =  max(dp[i-1][j] , dp[i][j-1]);
+                }
+            }
+        }
+        
+        return dp[m][n];
     }
-    
 };
