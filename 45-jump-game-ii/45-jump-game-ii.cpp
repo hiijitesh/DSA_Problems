@@ -1,27 +1,41 @@
-class Solution {
-public:
-    int jump(vector<int>& nums) {
-        vector<int> dp(nums.size()+1, -1);
-        return isPossible(nums, 0, dp);
+class Solution
+{
+    public:
+        int jump(vector<int> &arr)
+        {
+            int n = arr.size();
+            int jump = 1;
 
-    }
-   private: 
-      int isPossible(vector<int> &nums, int currIndex,  vector<int> &dp){
-        
-          if(currIndex >= nums.size()-1) return 0;
-          if(nums[currIndex] == 0) return 10001;
-          
-          if(dp[currIndex] != -1) return dp[currIndex];
-          int ans = 10001;
-        
-          int currJump = nums[currIndex];
-          for( int i=1; i<= currJump; i++){
-            
-               int tempAns= 1 + isPossible(nums, currIndex + i, dp);
-            
-               ans = min(ans , tempAns );
-          }
-          
-         return dp[currIndex] = ans;
-    }
+            int step = arr[0];
+            int maxReachablePoint = arr[0];
+
+            if (n <= 1) return 0;
+
+            if (arr[0] == 0) return -1;
+
+            int currIdx;
+
+            for (currIdx = 1; currIdx < n; currIdx++)
+            {
+                if (currIdx == n - 1)
+                {
+                    return jump;
+                }
+                maxReachablePoint = max(maxReachablePoint, currIdx + arr[currIdx]);
+
+                step--;
+
+                if (step == 0)
+                {
+                    jump++;
+                    if (currIdx >= maxReachablePoint)
+                    {
+                        return -1;
+                    }
+                    step = maxReachablePoint - currIdx;
+                }
+            }
+
+            return -1;
+        }
 };
