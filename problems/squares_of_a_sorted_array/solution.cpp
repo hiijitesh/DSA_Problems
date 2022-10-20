@@ -4,23 +4,13 @@ public:
         
         vector<int> ans(nums.size());
         
-        int low = 0;
-        int high = nums.size()-1;
-        
-        for( int  k = nums.size()-1; k>=0; k--){
-            
-            if(abs(nums[low]) >abs(nums[high])){
-                ans[k] = nums[low]*nums[low++];
-                // low++;
-            } 
-            else{
-                ans[k] = nums[high]*nums[high--];
-                // high--;
-            }
-            
+        for(int i = 0; i < nums.size(); i++)
+        {
+            ans[i] = nums[i]*nums[i];
         }
-        return ans;
-       
         
+        sort(ans.begin(), ans.end());
+        
+        return ans;
     }
 };
