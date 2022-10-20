@@ -1,21 +1,33 @@
 class Solution {
 public:
-	int numberOfDigits(int n)
-	{
-		int cnt = 0;
-		while (n > 0)
-		{
-			n /= 10;
-			cnt++;
-		}
-		return cnt;
-	}
-	int findNumbers(vector <int> &a)
-	{
-		int result = 0;
-		for (int &i : a)
-			if (numberOfDigits(i) % 2 == 0)
-				result++;
-		return result;
-	}
+    bool isEvenDigits(int x)
+    {
+        
+        int digitCnt = 0;
+         while(x > 0)
+         {
+             x % 10;
+             digitCnt++;
+             x = x/ 10;
+         }
+        
+        if(digitCnt % 2 == 0) return true;
+        
+        return false;
+    }
+    int findNumbers(vector<int>& nums) {
+        
+        int n = nums.size();
+        int count = 0;
+        
+        for(int i = 0; i < n; i++)
+        {
+            if(isEvenDigits(nums[i]))
+            {
+                count++;
+            }
+        }
+        
+        return count;
+    }
 };
