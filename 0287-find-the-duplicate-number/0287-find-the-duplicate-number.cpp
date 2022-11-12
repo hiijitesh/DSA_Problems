@@ -2,19 +2,22 @@ class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
         
-// Count sort
+//map
         int n = nums.size();
-        int count[n+1];
-        memset(count, 0, sizeof(count));
+        unordered_map<int, int> mp;
         
         for(int i = 0; i < n; i++)
         {
-            count[nums[i]]++;
-            
-            if(count[nums[i]] > 1)
-                return nums[i];
+            mp[nums[i]]++;
             
         }
+        
+        for(auto &m:mp)
+        {
+            if(m.second > 1)
+                return m.first;
+        }
+        
         
         return nums.size();
         
