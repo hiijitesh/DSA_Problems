@@ -1,33 +1,43 @@
 /**
  * Definition for a binary tree node.
- * public class TreeNode {
+ * struct TreeNode {
  *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
  */
 class Solution {
-    public :
-         int sum=0;
-    int inorder(TreeNode* root,int L,int R)
+public:
+    int sum = 0;
+    
+    int inorder(TreeNode* root, int low, int high)
     {
-        if(root){
-        inorder(root->left,L,R);
-        if(root->val>=L && root->val<=R)
-            sum+=root->val;
-        inorder(root->right,L,R);
+        if(root) 
+        {
+            inorder(root->left, low, high);
+            
+            if(root->val >= low and root->val <= high)
+            {
+                sum+=root->val;
+            }
+            
+            inorder(root->right, low, high);
         }
+        
         return sum;
+        
+        
     }
-    int rangeSumBST(TreeNode* root, int L, int R) {
-        if(!root)return 0;
-        return inorder(root,L,R);
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        
+        if(root == NULL)
+            return sum;
+        
+        return inorder(root, low, high);
+        
+        
     }
 };
