@@ -13,8 +13,7 @@ public:
             else
                 
                 rem = arr[i] % k;
-            // cout<<"rem : "<<rem <<" ";
-            // cout<<endl;
+           
             if(mp.find(rem)== mp.end())
                 mp[rem] = 1;
             else
@@ -29,7 +28,7 @@ public:
                     return false;
             } 
             
-            else if(mp.find(key.first)== mp.end())
+            else if(mp.find(k - key.first)== mp.end())
                 return false;
             
             else if(mp[key.first] != mp[k - key.first])
