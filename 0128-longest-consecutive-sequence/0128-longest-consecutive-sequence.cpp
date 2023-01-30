@@ -13,7 +13,7 @@ public:
             if(!s.count(num-1))
             {
                 int currNum = num;
-                int currLen = 1;
+                int currLen = 1; // there will be atleast size of one sequence
                 
                 while(s.count(currNum+1))
                 {
