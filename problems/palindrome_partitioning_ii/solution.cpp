@@ -1,39 +1,39 @@
 class Solution {
-public:
-    bool isPalindrome( string &s, int start, int end){
-        
-        while(start <= end){
-            if(s[start]!= s[end]) return false;
+   public:
+    bool isPalindrome(string& s, int start, int end) {
+        while (start < end) {
+            if (s[start] != s[end]) {
+                return false;
+            }
             start++;
             end--;
         }
         return true;
     }
-    int minNumberOfCut(string &s,int start , int end, vector<vector<int>> &dp ){
-        
-        if ( isPalindrome(s,start,end) ) return 0;
-            
-        if (dp[start][end] != -1) {
-            return dp[start][end];
+
+    int minCuts(string& s, int start, int end,vector<vector<int>>&vec) {
+        if (isPalindrome(s, start, end)) {
+            return 0;
         }
-        
+
+        if (vec[start][end] != -1) {
+            return vec[start][end];
+        }
+
         int ans = INT_MAX / 2;
-        
-        for ( int currIdx=start; currIdx<end; currIdx++){
-             if (isPalindrome(s, start, currIdx)){
-                 
-                 int leftHalfCut  = minNumberOfCut(s,start,currIdx ,dp);
-                 int rightHalfCut = minNumberOfCut(s, currIdx+1, end ,dp);
-                 ans= min(ans,1+ leftHalfCut + rightHalfCut);
-             }         
+        for (int i = start; i < end; i++) {
+            if (isPalindrome(s, start, i)) {
+                int left = minCuts(s, start, i, vec);
+                int right = minCuts(s, i + 1, end, vec);
+                ans = min(ans, 1 + left + right);
+            }
         }
-        return dp[start][end]=ans;
-        
+
+        return vec[start][end] = ans;
     }
+
     int minCut(string s) {
-        
-        vector<vector<int> >dp(2001 ,vector<int>(2001, -1));
-        return minNumberOfCut(s, 0,s.length()-1 ,dp);
-        
+        vector<vector<int>>vec(2001,vector<int>(2001,-1));
+        return minCuts(s, 0, s.length() - 1, vec);
     }
 };
