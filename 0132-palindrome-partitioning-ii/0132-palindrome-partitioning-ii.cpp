@@ -24,7 +24,7 @@ class Solution {
         for (int i = start; i < end; i++) {
             if (isPalindrome(s, start, i)) {
                 int left = minCuts(s, start, i, vec);
-                int right = right = minCuts(s, i + 1, end, vec);
+                int right = minCuts(s, i + 1, end, vec);
                 ans = min(ans, 1 + left + right);
             }
         }
