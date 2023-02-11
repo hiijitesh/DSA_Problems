@@ -1,20 +1,27 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& nums)
-    {
+    int maxProduct(vector<int>& nums) {
         
-        int maxRes = INT_MIN;
+        //This Problem is pattern of finding largest and second largest element in the array
+        int maxi1 = INT_MIN, maxi2 = maxi1;
         
         for(int i = 0; i < nums.size(); i++)
         {
-            for(int j = i+1; j < nums.size(); j++)
+            if(nums[i] >= maxi1 )
             {
-                int currDiff = (nums[i]-1) * (nums[j]-1);
-                maxRes = max(maxRes, currDiff);
+                maxi2 = maxi1;
+                maxi1 = nums[i];
+            }
+            
+            else if(nums[i] > maxi2 && nums[i] < maxi1)
+            {
+                maxi2 = nums[i];
             }
         }
         
+        int res = (maxi1-1)*(maxi2-1);
         
-        return maxRes;
+        return res;
+        
     }
 };
