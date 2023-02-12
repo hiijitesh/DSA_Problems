@@ -1,61 +1,69 @@
 class Solution {
 public:
-    int firstPosition( vector<int> &nums, int target){
-        int start= 0;
-        int end= nums.size()-1;
+    
+    int firstIndex(vector<int>&nums, int target)
+    {
+        int lo = 0, hi = nums.size()-1;
         
-        int ans=-1;
-        while( start <= end){
+        int ans = -1;
+        
+        while(lo <= hi)
+        {
+            int mid = lo + (hi -lo)/2;
             
-            int mid = start + ( end - start)/2;
-            
-            if ( target == nums [mid]){
-                 ans= mid;
-                end= mid-1;
+            if(target > nums[mid])
+            {
+                lo = mid+1;
             }
-            
-            else if( target > nums[mid]){
-                start= mid+1;
+            else if(target < nums[mid])
+            {
+                hi = mid-1;
             }
             else
-                end= mid-1;
+            {
+                ans = mid;
+                hi = mid -1;
+            }
         }
+        
         return ans;
     }
     
-    int lastPosition(vector<int> &nums, int target){
+    
+    int lastIndex(vector<int> &nums, int target)
+    {
+        int lo = 0, hi = nums.size()-1;
         
-        int start=0;
-        int end = nums.size()-1;
+        int ans = -1;
         
-        int ans=-1;
-        
-        while( start <= end){
+        while(lo <= hi)
+        {
+            int mid = lo + (hi - lo)/2;
             
-            int mid = start + ( end - start )/2;
-            
-            if( target == nums[mid]){
-                
-                ans=mid;
-                start = mid+1;
+            if(target > nums[mid])
+            {
+                lo = mid+1;
             }
-            else if( target > nums[mid]){
-                start= mid+1;
+            else if(target < nums[mid])
+            {
+                hi = mid - 1;
             }
             else
-                end= mid-1;
+            {
+                ans = mid;   
+                lo = mid + 1;
+            }
         }
+        
         return ans;
     }
-    
     vector<int> searchRange(vector<int>& nums, int target) {
-        vector<int> res(2,-1);
         
-        res[0] = firstPosition(nums,target);
+        vector<int> ans(2, -1);
+        ans[0] = firstIndex(nums, target);
+        ans[1] = lastIndex(nums, target);
         
-        res[1] = lastPosition(nums, target);
-        
-        return res;
-        
+        return ans;
     }
+       
 };
