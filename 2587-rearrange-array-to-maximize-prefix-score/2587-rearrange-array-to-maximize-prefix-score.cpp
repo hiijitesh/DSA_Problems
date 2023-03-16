@@ -3,23 +3,17 @@ public:
     int maxScore(vector<int>& nums) {
         
         int n = nums.size();
-        vector<long long> prefix(n);
-        
-        sort(nums.begin(), nums.end(), greater<int>());
-        
-        prefix[0] = nums[0];
-        
         int ans = 0;
-        if(prefix[0] > 0) ans++;
+        long long sum = 0;
+        sort(nums.begin(), nums.end());
         
-        for(int i = 1 ; i < n; i++)
+        for(int i = n-1; i >=0; i--)
         {
-            prefix[i] = prefix[i-1] + nums[i];
+            sum += nums[i];
             
-            if(prefix[i] > 0) ans++;
+            if(sum > 0) ans++;
         }
         
         return ans;
-        
     }
 };
