@@ -1,29 +1,30 @@
 class Solution {
 public:
+    typedef pair<int, int> pi;
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
         vector<int> ans;
         
-        priority_queue<pair<int, int>> maxheap;
+        priority_queue<pi>minHeap;
         
         for(int i = 0; i < arr.size(); i++)
         {
-            maxheap.push({abs(arr[i]- x), arr[i]});
+            int diff = abs(arr[i]-x);
+            minHeap.push({diff, arr[i]});
             
-            if(maxheap.size() > k)
+            while(minHeap.size() > k)
             {
-                 maxheap.pop();
+                minHeap.pop();
             }
         }
         
-        while(maxheap.size() > 0)
+        while(minHeap.size() > 0)
         {
-            int temp = maxheap.top().second;
-            maxheap.pop();
-            ans.push_back(temp);
+            int curr = minHeap.top().second;
+            ans.push_back(curr);
+            minHeap.pop();
         }
-        sort(ans.begin(), ans.end());
-        
+         sort(ans.begin(), ans.end());
         return ans;
     }
 };
