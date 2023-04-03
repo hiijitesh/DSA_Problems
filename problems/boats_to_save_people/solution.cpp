@@ -3,26 +3,23 @@ public:
     int numRescueBoats(vector<int>& people, int limit) {
         
         sort(people.begin(), people.end());
-        int light = 0, heavy = people.size() - 1;
-        
         int ans = 0;
+        int low = 0, high = people.size()-1;
         
-        while( light <= heavy)
+        while(low <= high)
         {
-            int sum = people[light] + people[heavy];
+            int currWeight = people[low] + people[high];
             
-            if(sum <= limit){
-                ans++;
-                light++;
-                heavy--;
+            if(currWeight <= limit)
+            {
+                ans ++;
+                low++;
+                high--;
             }
-            
-            else {
+            else{
                 ans++;
-                heavy--;
+                high--;
             }
-                
-            
         }
         return ans;
     }
