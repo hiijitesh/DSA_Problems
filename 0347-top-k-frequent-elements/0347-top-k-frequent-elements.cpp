@@ -1,9 +1,9 @@
 
-    bool cmp(const pair<int, int> &a, const pair<int, int> &b){
+bool cmp(const pair<int, int> &a, const pair<int, int> &b){
         
     
         return a.second > b.second;
-    }
+}
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
