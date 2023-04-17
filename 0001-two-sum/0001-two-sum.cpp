@@ -1,31 +1,31 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int n = nums.size();
-        vector<pair<int, int>> ans(n);
         
-        for(int i = 0; i<n; i++){
-            ans[i] = make_pair(nums[i], i);
+        vector<pair<int, int>> arr;
+        
+        for(int i = 0; i < nums.size(); i++)
+        {
+           arr.push_back({nums[i], i});
         }
         
-        sort(ans.begin(), ans.end());
+        //sort it so for using two pointer
+        sort(arr.begin(), arr.end());
         
-        int i = 0, j = n-1;
+        int i = 0, j = nums.size()-1;
         
-        while(i < j){
+        while(i < j)
+        {
+            int currSum = arr[i].first + arr[j].first;
             
-            int sum = ans[i].first + ans[j].first;
+            if(currSum == target) return {arr[i].second, arr[j].second};
             
-            if(sum == target){
-                return {ans[i].second, ans[j].second};
-            }
-            if( sum > target) j--;
+            else if(currSum > target) j--;
             
-            else
-                i++;
+            else i++;
         }
+        //return empty array
         return {};
-       
+        
     }
 };
-
