@@ -1,14 +1,17 @@
 ## List of Topic 
+### Data Structures
 * Arrays
+* Matrix
 * Linkedlist
 * Stacks & Queues
 * Tree
 * Hashmap
 * Heap
 
-## Algorithms
+### Algorithms
 * Searching & Sorting
 * Recursion
+* Backtracking
 * Dynamic Programming
 * Two Pointers
 * Prefix & Suffixs
