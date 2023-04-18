@@ -2,31 +2,33 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         
-        unordered_set<int> s;
+        unordered_map<int, bool> mp;
         
-        for(auto &x: nums) s.insert(x); //store the element in set so that we can check on later that wether particular element does exist in set or not
+        for(auto &x:nums) mp[x] = true;
         
-        int longestCount = 0;
-        
-        for(int i = 0; i < nums.size(); i++)
+        for(auto &val:nums)
         {
-            int  currCount = 0;
-            int currNum = nums[i]-1; // suppose curr num = 3, so will check 4,5,6,7 exist or not
-            
-            if(s.find(currNum) == s.end())
-            {
-                //this means it will not check for the 5, 6, 7, it will direct start from the 9 or 10 
-            
-            while(s.find(currNum+1) != s.end())
-            {
-                currCount +=1;
-                currNum +=1;
-            }
-            
-            longestCount = max(longestCount, currCount);
-            }
-            
+            if(mp.find(val-1) != mp.end())
+                mp[val] = false;
         }
-        return longestCount;
+        
+        int longest = 0;
+        for(auto &val:nums)
+        {
+            int currCount = 1;
+            int currNum = val;
+            if(mp[val])
+            {
+                while(mp.find(currNum+1) != mp.end())
+                {
+                    currNum+=1;
+                    currCount+=1;
+                }
+                
+                longest = max(longest, currCount);
+            }
+        }
+        
+        return longest;
     }
 };
