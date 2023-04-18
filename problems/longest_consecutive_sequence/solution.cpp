@@ -2,29 +2,33 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         
-        int ans = 0;
-        unordered_set<int> s;
+        unordered_map<int, bool> mp;
         
-        for(auto num:nums)
-            s.insert(num);
+        for(auto &x:nums) mp[x] = true;
         
-        for(auto num : nums)
+        for(auto &val:nums)
         {
-            if(!s.count(num-1))
+            if(mp.find(val-1) != mp.end())
+                mp[val] = false;
+        }
+        
+        int longest = 0;
+        for(auto &val:nums)
+        {
+            int currCount = 1;
+            int currNum = val;
+            if(mp[val]) // curr num is starting point
             {
-                int currNum = num;
-                int currLen = 1; // there will be atleast size of one sequence
-                
-                while(s.count(currNum+1))
+                while(mp.count(currNum+1))
                 {
                     currNum+=1;
-                    currLen+=1;
+                    currCount+=1;
                 }
                 
-                ans = max(ans, currLen);
+                longest = max(longest, currCount);
             }
         }
         
-        return ans;
+        return longest;
     }
 };
