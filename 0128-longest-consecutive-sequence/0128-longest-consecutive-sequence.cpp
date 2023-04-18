@@ -17,9 +17,9 @@ public:
         {
             int currCount = 1;
             int currNum = val;
-            if(mp[val])
+            if(mp[val]) // curr num is starting point
             {
-                while(mp.find(currNum+1) != mp.end())
+                while(mp.count(currNum+1))
                 {
                     currNum+=1;
                     currCount+=1;
