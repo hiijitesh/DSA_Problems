@@ -1,37 +1,31 @@
-class Solution
+bool cmp(const pair<int, int> &a, const pair<int, int> &b)
 {
-    public:
-        bool static comp(pair<int, int> a, pair<int, int> b)
-        {
-            if (a.second == b.second)
-                return a.first > b.first;
-
-            return a.second < b.second;
-        }
-
-    vector<int> frequencySort(vector<int> &nums)
-    {
-
+    if(a.second == b.second) 
+        return a.first > b.first;
+    return a.second < b.second;
+}
+class Solution {
+public:
+    vector<int> frequencySort(vector<int>& nums) {
+        
         unordered_map<int, int> mp;
-        for(auto &num :nums)
+        vector<int> ans;
+        for(auto &num: nums)
             mp[num]++;
         
-        vector<int> ans;
-        vector<pair<int, int>> vec;
-        for (auto pr: mp)
+        vector<pair<int, int>> elem;
+        
+        for(auto &it:mp)
+            elem.push_back({it.first, it.second});
+        
+       sort(elem.begin(), elem.end(), cmp);
+        
+        for(auto &val:elem)
         {
-            // cout<<pr<<" ";
-            vec.push_back(pr);
-        }
-        sort(vec.begin(), vec.end(), comp);
-
-    
-        for (int i = 0; i < vec.size(); i++)
-        {
-            while (vec[i].second > 0)
+            while(val.second > 0)
             {
-                ans.push_back(vec[i].first);
-                vec[i].second--;
+                ans.push_back(val.first);
+                val.second--;
             }
         }
         return ans;
