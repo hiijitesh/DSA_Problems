@@ -1,29 +1,30 @@
 class Solution {
 public:
-    bool isPalindrome(string s) {
+    bool isPalindrome(string str) {
         
-        vector<char> curr;
-        if(s.size() == 0) return true;
+        //intuition --> use two pointer and check if current character is alphanumeric then continue else left++ && right --
+        //iff currchar is alpha numeric then compara s[left] != s[right] return false
         
-        for(int i = 0; i < s.size(); i++)
+        int s = 0, e = str.size()-1;
+        
+        while( s < e)
         {
-            char currChar = tolower(s[i]);
-            if(isalnum(currChar)){
-                // cout<<currChar<<" ";
-                curr.push_back(currChar);
-            }          
-        }
-                
-        int i = 0, j = curr.size()-1;
-        
-        while(i <= j)
-        {
-            if(curr[i] != curr[j])
+            if(!isalnum(str[s]))
+                s++;
+            
+            else if(!isalnum(str[e]))
+                e--;
+            
+            else if(tolower(str[s]) != tolower(str[e]))
                 return false;
-            i++;
-            j--;
+            
+            else
+            {
+                s++;
+                e--;
+            }
+                
         }
-        
         return true;
     }
 };
