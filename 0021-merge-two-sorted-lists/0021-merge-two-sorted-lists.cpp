@@ -12,61 +12,41 @@ class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         
-        //corner case
+        ListNode* dummy = new ListNode(-100);
+        ListNode* head  = dummy;
         
-        if (list1 == nullptr) return list2;
+        if(list1 == NULL) 
+            return list2;
         
-        if(list2 == nullptr) return list1;
+        if(list2 == NULL)
+            return list1;
         
-        //create dummyNode
-        
-        ListNode* dummyNode = new ListNode(-100);
-        
-        ListNode* head = dummyNode;
-        
-        
-        //traverse over the both LL
-        
-        while(list1!= nullptr and list2 != nullptr)
+        while(list1 != NULL && list2 != NULL)
         {
-            if(list1->val < list2->val){
-                
-                ListNode* newNode = new ListNode(list1->val);
-                dummyNode->next = newNode;
-               
-                //move list 1
-               list1 = list1->next;
-                
-            }
-                
-               
             
-            else{
+            if(list1 -> val < list2 -> val)
+            {
+                ListNode* tempNode = new ListNode(list1->val);
+                dummy->next = tempNode;
                 
-                ListNode* newNode = new ListNode(list2->val);
-                dummyNode->next = newNode;
-               
-                //move list 1
-               list2 = list2->next;
-                
+                list1 = list1->next;
             }
-              
-            dummyNode = dummyNode->next;
-            
+            else
+            {
+                ListNode* tempNode = new ListNode(list2->val);
+                dummy->next = tempNode;
+                list2 = list2->next;
+            }
+            dummy = dummy->next;
         }
         
-        //when list1 is empty
+        //when list1 is empyt
         
-        if(list2 != nullptr){
-            dummyNode->next = list2;
-        }
-        
-         if(list1 != nullptr){
-            dummyNode->next = list1;
-        }
+        if(list2 != NULL)
+            dummy->next = list2;
+        if(list1 != NULL)
+            dummy->next = list1;
         
         return head->next;
-        
-        
     }
 };
