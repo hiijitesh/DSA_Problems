@@ -1,29 +1,28 @@
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) 
-    {
-     
+    int lengthOfLongestSubstring(string s) {
         
         int ans = 0;
-        int left = 0;
+        int release = 0;
         
+        //store the char and its index, so we can get length of longest string
         unordered_map<char, int> mp;
         
-        for(int right = 0; right < s.size(); right++)
+        for(int aquire = 0; aquire < s.size(); aquire ++)
         {
             
-            char curr = s[right];
+            char currChar = s[aquire];
             
-            if(mp.find(curr) != mp.end() && mp[curr] >= left)
-                 left = mp[curr] + 1;
+            //currchar is present in the map then move release pointer 
+            //mp[currChar] >= release , index of currChar is greater than release pointer 
+            if(mp.find(currChar) != mp.end() && mp[currChar] >= release)
+                //move the release one step ahead
+                release = mp[currChar] + 1;
             
-            int a = right - left +1;
-            mp[curr] = right;
-            ans = max(ans, a);
-            
-            
+            int currLen = aquire - release + 1;
+            mp[currChar] = aquire;
+            ans = max(ans, currLen);
         }
-        
         return ans;
     }
 };
