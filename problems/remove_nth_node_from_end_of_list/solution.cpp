@@ -34,21 +34,20 @@ public:
         
         if(head == NULL or head ->next == NULL) return NULL;
         
-        ListNode* dummy = new ListNode(-1);
+        ListNode *dummy = new ListNode(-1);
         dummy->next = reverse(head);
         
         head = dummy;
         
-        ListNode* curr = head;
-        ListNode* prev = NULL;
+        ListNode *curr = head, *prev = NULL;
         
         for(int i = 0; i < n; i++)
         {
             prev = curr;
             curr = curr->next;
-            
         }
         
+        //delete that node
         prev->next = curr->next;
         
         return reverse(head->next);
