@@ -3,7 +3,7 @@ public:
 
     int arraySign(vector<int>& nums) {
         
-        int product = 1, count_negative =0;
+        int count_negative = 0;
         
         for( auto x: nums){
             
