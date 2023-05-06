@@ -34,28 +34,3 @@ public:
         
     }
 };
-
-
-// class Solution {
-// public:
-//     bool isValidBST(TreeNode* root) {
-//         long long int prev[1] = {-9999999999L};
-//         return isBST(root, prev);
-//     }
-    
-//     bool isBST(TreeNode* root, long long int prev[])
-//     {
-//         if(root == NULL)
-//             return true;
-        
-//         bool leftAns = isBST(root->left, prev);
-        
-//         if(root->val <= prev[0])
-//             return false;
-        
-//         prev[0] = root->val;
-        
-//         bool rightAns = isBST(root->right, prev);
-//         return leftAns && rightAns;
-//     }
-// };
