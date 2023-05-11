@@ -13,6 +13,7 @@ public:
                     continue;
                 
                 int num = board[i][j] - '0';
+                cout<<num<<" "<<endl;
                 int box_c = ((i/3)*3) + (j/3);
                 
                 if(row[i][num] or col[j][num] or box[box_c][num])
