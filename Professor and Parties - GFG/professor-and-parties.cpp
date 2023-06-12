@@ -16,7 +16,7 @@ class Solution{
         for(int i = 0; i < n; i++)
         {
             int num = a[i];
-            if(mp.find(num) != mp.end())
+            if(mp.count(num))
                 return "BOYS";
             mp[num]++;
         }
