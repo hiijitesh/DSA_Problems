@@ -2,30 +2,18 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         
-        vector<pair<int, int>> arr;
-        
+        unordered_map< int , int> mp;
+
+        for(int i = 0; i < nums.size(); i++)
+            mp[nums[i]] = i;
+
         for(int i = 0; i < nums.size(); i++)
         {
-           arr.push_back({nums[i], i});
+            int curr = target - nums[i];
+            // cout<<"curr"<<curr<<" ";
+            if(mp.find(curr) != mp.end() && i != mp[curr])
+                return {i, mp[curr]};
         }
-        
-        //sort it so for using two pointer
-        sort(arr.begin(), arr.end());
-        
-        int i = 0, j = nums.size()-1;
-        
-        while(i < j)
-        {
-            int currSum = arr[i].first + arr[j].first;
-            
-            if(currSum == target) return {arr[i].second, arr[j].second};
-            
-            else if(currSum > target) j--;
-            
-            else i++;
-        }
-        //return empty array
         return {};
-        
     }
 };
