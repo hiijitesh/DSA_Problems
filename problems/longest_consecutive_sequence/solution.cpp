@@ -3,32 +3,31 @@ public:
     int longestConsecutive(vector<int>& nums) {
         
         unordered_map<int, bool> mp;
-        
-        for(auto &x:nums) mp[x] = true;
-        
-        for(auto &val:nums)
+
+        for(auto &num:nums)
+            mp[num] = true;
+        for(auto &num:nums)
         {
-            if(mp.find(val-1) != mp.end())
-                mp[val] = false;
+            if(mp.find(num-1) != mp.end())
+                mp[num] = false;
         }
-        
-        int longest = 0;
-        for(auto &val:nums)
+        int ans = 0;
+        for(auto &num:nums)
         {
-            int currCount = 1;
-            int currNum = val;
-            if(mp[val]) // curr num is starting point
+            int count = 1;
+            int currNum = num;
+            //check if currNum is starting point of consecutive
+            if(mp[num])
             {
+                //check if next currNum exist in map then count++
                 while(mp.count(currNum+1))
                 {
-                    currNum+=1;
-                    currCount+=1;
+                    count++;
+                    currNum +=1;
                 }
-                
-                longest = max(longest, currCount);
+                ans = max(ans, count);
             }
         }
-        
-        return longest;
+        return ans;
     }
 };
