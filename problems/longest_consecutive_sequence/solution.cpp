@@ -6,11 +6,13 @@ public:
 
         for(auto &num:nums)
             mp[num] = true;
+
         for(auto &num:nums)
         {
             if(mp.find(num-1) != mp.end())
                 mp[num] = false;
         }
+        
         int ans = 0;
         for(auto &num:nums)
         {
