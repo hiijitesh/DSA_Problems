@@ -1,30 +1,26 @@
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
+    int maxArea(vector<int>& pool) {
         
-        int start = 0, end = height.size()-1;
-        
-        int water = 0, h = 0;
-        int area = 0;
-        
-        while(start < end)
+        int left = 0, right = pool.size()-1;
+
+        int water = 0, area = 0;
+
+        while(left < right)
         {
-            water = end - start;
-            h = min(height[start], height[end]);
-            
-            area = max(area, water * h);
-            
-            if(height[start] < height[end])
-                start++; //we need to move minm one
-            else if(height[start] > height[end])
-                end --;
-            else
-            {
-                start++;
-                end--;
-            }
+            water = right - left;
+            area = max(area, water*min(pool[left], pool[right]));
+
+            if(pool[left]> pool[right])
+                right--;
+            else if(pool[left] <= pool[right])
+                left++;
+            // else{
+            //     left++;
+            //     right--;
+            // }
+
         }
         return area;
-        
     }
 };
