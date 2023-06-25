@@ -1,25 +1,27 @@
 class Solution {
 private: 
-    int totalProfit(vector<int> &prices, int currDay, bool canBuy, int TxnCount, vector<vector<vector<int>>> &dp)
+    int totalProfit(vector<int> &prices, int currDay, bool canBuy, int txns, vector<vector<vector<int>>> &dp)
     {
         if(currDay >= prices.size()) 
             return 0;
-        if(TxnCount <= 0) 
+        if(txns <= 0) 
             return 0;
         
-        if(dp[currDay][canBuy][TxnCount] != -1) return dp[currDay][canBuy][TxnCount];
+        if(dp[currDay][canBuy][txns] != -1) return dp[currDay][canBuy][txns];
         
-        int idle = totalProfit(prices, currDay+1, canBuy, TxnCount, dp);
+        // int idle = totalProfit(prices, currDay+1, canBuy, txns, dp);
         
-        if(canBuy){
-            int buy = -prices[currDay] + totalProfit(prices, currDay+1, false, TxnCount, dp);
-                 return dp[currDay][canBuy][TxnCount] = max(idle, buy);
+        if(canBuy)
+        {
+            int idle = totalProfit(prices, currDay+1, canBuy, txns, dp);
+            int buy = -prices[currDay] + totalProfit(prices, currDay+1, false, txns, dp);
+            return dp[currDay][canBuy][txns] = max(idle, buy);
         }
         else
         {
-            int sell = prices[currDay] + totalProfit(prices, currDay+1, true, TxnCount-1, dp);
-                return dp[currDay][canBuy][TxnCount] = max(idle, sell);
-        
+            int idle = totalProfit(prices, currDay+1, canBuy, txns, dp);
+            int sell = prices[currDay] + totalProfit(prices, currDay+1, true, txns-1, dp);
+            return dp[currDay][canBuy][txns] = max(idle, sell);
         }
         
     }
