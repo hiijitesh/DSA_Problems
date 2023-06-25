@@ -4,7 +4,6 @@ public:
     int bestTime ( vector<int> & prices, int currDay, bool canBuy, int fee, vector<vector<int>> &dp){
         
         if (currDay >= prices.size() ) return 0; 
-        // if ( trans <=0 ) return 0;
         
         if(dp[currDay][canBuy]!= -1) return dp[currDay][canBuy];
         
