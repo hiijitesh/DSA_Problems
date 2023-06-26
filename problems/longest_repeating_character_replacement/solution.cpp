@@ -1,30 +1,27 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
+        unordered_map<int, int> mp;
 
-        unordered_map<char, int> mp;
-
-        int ans = 0, rel = 0, acquire = 0;
+        int aq = 0, rel = 0, ans = 0;
         int maxCount = 0;
 
-        while(rel < s.size())
+        while(aq < s.size())
         {
-            char currChar = s[rel];
-            mp[currChar]++;
+            int curr = s[aq];
 
-            maxCount = max(maxCount,  mp[currChar]);
-            int winLen = rel - acquire + 1;
-            
-            if(winLen - maxCount <= k)
-                ans = max (ans, winLen);
-            else
-                {
-                    mp[s[acquire]]--;
-                    acquire++;
-                }
-            
-            rel++;
-               
+            mp[curr]++;
+            maxCount = max(maxCount, mp[curr]);
+
+            int winLen = aq-rel+1;
+            if(winLen - maxCount<=k)
+                ans = max(ans, winLen);
+            else{
+                mp[s[rel]]--;
+                rel++;
+            }
+
+            aq++;
         }
         return ans;
     }
