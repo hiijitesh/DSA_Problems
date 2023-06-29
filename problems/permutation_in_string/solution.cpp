@@ -1,37 +1,32 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        unordered_map< char, int >mp;   
-        for(auto it : s1){
-            mp[it]++;
-        }
-    //Use the count variable to see if all of the characters in the map have the same frequency, indicating that an anagram has been found.
-        int count = mp.size();       
-        int i = 0, j = 0;
-        int k = s1.size();             //Window Size
         
-        while(j < s2.size()){
-            if(mp.find(s2[j]) != mp.end()){      //If a character is found that already exists in the map, reduce its frequency by one.
-                mp[s2[j]]--;
-                if(mp[s2[j]] == 0){     //If the frequency of a specific character on the map is 0, it means that all occurrences of that character is found inside the current window size.
-                    count--;
-                }
+        if(s2.size() < s1.size())
+            return false;
+
+        vector<int> mp1(26, 0), mp2(26,0);
+        for(auto &ch:s1)
+            mp1[ch-'a']++;
+
+        int aq = 0, rel = 0;
+
+        while(aq < s2.size())
+        {
+            char curr = s2[aq];
+            mp2[curr-'a']++;
+            int winSize = aq-rel+1;
+            if(winSize == s1.size())
+            {
+                if(mp1 == mp2)
+                    return true;
             }
-            if(j-i+1 < k){
-                j++;
-            }
-            else if(j-i+1 == k){
-				if(count == 0){    //Anagram found 
-					return true;  
-				}
-                if(mp.find(s2[i]) != mp.end()){  //Check if that character is present in the map while sliding the window, then increase its frequency by one, as we decreased its frequency when we first met it while crossing the window.
-                    mp[s2[i]]++;
-                    if(mp[s2[i]] == 1){
-                        count++;
-                    }
-                }
-                i++;
-                j++;
+            
+            if(winSize < s1.size()) aq++;
+            else {
+                mp2[s2[rel]-'a']--;
+                rel++;
+                aq++;
             }
         }
         return false;
