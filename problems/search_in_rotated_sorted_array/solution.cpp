@@ -8,24 +8,18 @@ public:
         while(start <= end)
         {
             int mid = start + (end - start)/2;
-            
-            
             if(nums[mid] == target)
                 return mid;
             
-            
-            //check if right side is stricly increasing
-            
+            //check if left side is stricly increasing(sorted)
             if(nums[mid] >= nums[start])
             {
                 //check if target does exists in left side strickly increasing side
-                
                 if(target <= nums[mid] && target >= nums[start])
                     end = mid - 1;
                 else
                     start = mid + 1;
             }
-            
             //right side is stricly increasing
             else
             {
@@ -33,7 +27,6 @@ public:
                     start = mid + 1;
                 else
                     end = mid - 1;
-                
             }
         }
         return -1;
