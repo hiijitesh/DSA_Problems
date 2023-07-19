@@ -17,33 +17,32 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        unordered_map<Node*,Node*>mp;
-        Node* dummy = new Node(100001);
-        Node* runner = dummy;
+
+        unordered_map<Node*, Node*> mp;
+        Node* dummyNode = new Node(100001);
         Node* curr = head;
-        
-        
-        while(curr!=NULL)
-        {
-            Node* newnode = new Node(curr->val);
-            runner->next = newnode;
-            mp[curr] = newnode;
-            curr=curr->next;
-            runner=runner->next;
+        Node* runner = dummyNode;
+
+        while(curr!=NULL){
+            Node* newNode = new Node(curr->val);
+            runner->next = newNode;
+            //store Old Node as key, newer Node as value;
+            mp[curr] = newNode;
+            curr = curr->next;
+            runner = runner->next;
         }
-        
-        
+
+        //now we will connect the random pointer of newly LL
         curr = head;
-        runner = dummy->next;
-        
-        
-        while(curr!=NULL)
-        {
-            if(curr->random!=NULL)
+        runner = dummyNode->next;
+        while(curr!=NULL){
+
+            if(curr->random!=NULL){
                 runner->random = mp[curr->random];
+            }
             runner = runner->next;
             curr = curr->next;
         }
-        return dummy->next;
+        return dummyNode->next;
     }
 };
