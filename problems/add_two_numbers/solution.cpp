@@ -11,63 +11,37 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        
+
         ListNode* dummyNode = new ListNode(-1);
         ListNode* head = dummyNode;
-        
-        if(!l1) return l2;
-        if(!l2 ) return l1;
-        
-        int carry = 0;
-        int total = 0, firstNum = 0, secondNum = 0;
-        
-        while(l1  or l2)
+        int num1 = 0, num2 = 0, carry = 0;
+
+        while(l1 || l2)
         {
-           
-            if(l1){
-               
-                firstNum = l1->val;
-            }
-            else
-                firstNum = 0;
-            
-            if(l2){
-                
-                 secondNum = l2->val;
-            }
-            else
-                secondNum = 0;
-           
-            
-            total = firstNum + secondNum + carry;
-            
-            carry = total/10;
-            total %= 10;  
-            
-            //CREATING THE NEW NODE     
-            ListNode* newNode = new ListNode(total);
-            
-            //create dummNode and point it to newly created node
-            
+            if(l1) num1 = l1->val;
+            else num1 = 0;
+
+            if(l2) num2 = l2->val;
+            else num2 = 0;
+
+            int newNum = num1+num2+carry;
+
+            carry = newNum/10;
+            newNum = newNum%10;
+
+            ListNode* newNode = new ListNode(newNum);
             dummyNode->next = newNode;
-            //now moving to the next node in both LL
             dummyNode = dummyNode->next;
-            if(l1){
-                l1 = l1->next;
-            }
-            if(l2){
-                
-                l2 = l2->next;
-            }    
+
+            if(l1) l1 = l1->next;
+            if(l2) l2 = l2->next;
         }
 
         if(carry == 1){
-            
-            ListNode* newNode = new ListNode(1);
+            ListNode* newNode = new ListNode(carry);
             dummyNode->next = newNode;
-            
         }
-        
+
         return head->next;
         
     }
