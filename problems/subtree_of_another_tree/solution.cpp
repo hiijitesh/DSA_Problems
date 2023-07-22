@@ -10,23 +10,24 @@
  * };
  */
 class Solution {
-public:
-    bool isSameTree(TreeNode* s, TreeNode* t)
-    {
-        if(!s || !t)
-           return s==NULL && t==NULL;
-         else if(s->val == t->val) 
-           return isSameTree(s->left,t->left) && isSameTree(s->right,t->right);
-       else
-           return false;
+private:
+    bool isSametree(TreeNode* s, TreeNode* t){
+        if(!s or !t)
+            return s==NULL and t == NULL;
+        if(s->val == t->val)
+            return isSametree(s->left, t->left) and isSametree(s->right, t->right);
+        else
+            return false;
     }
+public:
     bool isSubtree(TreeNode* s, TreeNode* t) {
         if(s == NULL)
             return false;
 
-        else if(isSameTree(s,t))
+        if(isSametree(s,t))
             return true;
-        else
-            return isSubtree(s->left, t) || isSubtree(s->right, t);
+
+        else 
+            return isSubtree(s->left, t) or isSubtree(s->right, t);
     }
 };
