@@ -10,29 +10,19 @@
  * };
  */
 class Solution {
-    
-
-  public:
-    
-    void recursion(TreeNode* root , int level , vector<int> &res){
-        
-        if(root==NULL) return;
-        if(res.size()==level) res.push_back( root->val);
-        
-        recursion(root->right, level+1, res);
-        recursion(root->left,level+1, res);
+private:
+    void rightView(TreeNode* root, vector<int> &ans, int level){
+        if(root == NULL)
+            return;
+        if(level == ans.size())
+            ans.push_back(root->val);
+        rightView(root->right, ans, level+1);
+        rightView(root->left, ans, level+1);
     }
-    // private:
+public:
     vector<int> rightSideView(TreeNode* root) {
-        
-        vector<int> res;
-        
-        recursion(root, 0, res);
-        
-        return res;
-        
+        vector<int> ans;
+        rightView(root, ans, 0);
+        return ans;
     }
-    
-    
-    
 };
