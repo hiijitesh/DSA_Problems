@@ -11,24 +11,21 @@
  */
 class Solution {
 public:
-    int dfs(TreeNode* root, int maxi)
-    {
+    int dfs(TreeNode* root, int maxi){
         int goodNode = 0;
-
-        if(!root) return goodNode;
-
-        if(root->val >= maxi)
-        {
+        if(!root) 
+            return goodNode;
+        if(root->val >= maxi){
             goodNode++;
             maxi = root->val;
         }
 
-        return goodNode+ dfs(root->left, maxi) + dfs(root->right, maxi);
+        int left = dfs(root->left, maxi);
+        int right = dfs(root->right, maxi);
+
+        return goodNode+left+right;
     }
     int goodNodes(TreeNode* root) {
-        
         return dfs(root, INT_MIN);
-        
     }
 };
-
