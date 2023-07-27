@@ -14,9 +14,12 @@ public:
             if(mp.find(s[j])!=mp.end())
             {
                 mp[s[j]]--;
+                //suppose if the element is duplicate then decrement the count only when all the duplicates are found
                 if(mp[s[j]]==0)
                     count--;
             }
+
+            // if count become zero then we found the match
             if(count==0)
             {
                 while(count==0)
@@ -24,6 +27,8 @@ public:
                     if(mp.find(s[i])!=mp.end())
                     {
                         mp[s[i]]++;
+                        //entry can be negative so that we can get the idea of duplicate
+                        // negative element shows the extra Element in current windows
                         if(mp[s[i]]==1)
                         {
                             count++;
