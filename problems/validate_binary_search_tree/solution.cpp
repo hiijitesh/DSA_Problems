@@ -13,9 +13,9 @@ class Solution {
 public:
     bool checkBST( TreeNode* root , vector<long long> &prev){
         
-        if(root== NULL) return true;
+        if(root == NULL) return true;
         
-        bool leftSide= checkBST( root->left, prev);
+        bool leftSide = checkBST( root->left, prev);
         
         if(root->val <= prev[0]) return false;
         
