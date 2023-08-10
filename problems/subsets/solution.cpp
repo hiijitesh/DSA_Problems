@@ -1,41 +1,23 @@
 class Solution {
-
-private: 
-    void generateAllSubsets(vector<int> &nums, int currentIndex, vector<int>&currentSet, vector<vector<int>> &result){
-        
-        // Base case // if we reached at last index then we can push back aur current set to result
-        if(currentIndex >= nums.size()){
-            result.push_back(currentSet);
+public:
+   void  generateSubsets(int currIdx,vector<int>& nums, vector<int>&curr, vector<vector<int>> &result){
+        if(currIdx >= nums.size()){
+            result.push_back(curr);
             return;
         }
-        
-        //we wiil take one element from nums array 
-        int currentValue = nums[currentIndex];
-        
-        //if we consider that currentValue element then we push back into current set and move to next index 
-        currentSet.push_back(currentValue);
-        
-        //call to consider branch
-        generateAllSubsets(nums, currentIndex+1, currentSet, result);
-        
-        // while returning we have to pop back those element that was added last time because we are printing the subset so its should be dlted after printing
-        currentSet.pop_back();
-        
-        // call to not consider branch
-        generateAllSubsets(nums, currentIndex+1, currentSet, result);
-        
+        //call for consider
+        int currVal = nums[currIdx];
+        curr.push_back(currVal);
+        generateSubsets(currIdx+1, nums, curr, result);
+        curr.pop_back();
+        generateSubsets(currIdx+1, nums, curr,result);
+
     }
-    
-public:
+
     vector<vector<int>> subsets(vector<int>& nums) {
-        
         vector<vector<int>> result;
-        
-        vector<int> currentSet;
-        
-        generateAllSubsets(nums, 0, currentSet, result);
+        vector<int>curr;
+        generateSubsets(0,nums, curr, result);
         return result;
     }
-    
-    
 };
