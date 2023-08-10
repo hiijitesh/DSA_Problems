@@ -1,36 +1,29 @@
 class Solution {
 public:
-    void solve(vector<int>& nums, int currIdx,int target, vector<int>&validSet,  vector<vector<int>> &ans){
-        
-        if(target == 0)
-        {
-            ans.push_back(validSet);
-            return;
-        }
-        
-        if(currIdx >= nums.size())
-        {
+    void generateCombination(int idx, vector<int>&nums, int target, vector<int>&curr,  vector<vector<int>>&result){
+
+        if(target == 0){
+             result.push_back(curr);
              return;
         }
-        
-        //take current element 
-        int currNum = nums[currIdx];
-        
-        if(currNum <= target)
-        {
-            //take currNum into validset
-            validSet.push_back(currNum);
-            solve(nums, currIdx, target-currNum, validSet, ans);
-            validSet.pop_back();
+
+        if(idx >= nums.size()){
+           return;
         }
-         solve(nums, currIdx+1, target, validSet, ans);
+
+        int currVal = nums[idx];
+        if(currVal <= target){
+        curr.push_back(currVal);
+        generateCombination(idx, nums, target-currVal, curr, result);
+        curr.pop_back();
+        }
+        generateCombination(idx+1, nums, target, curr, result);
+
     }
     vector<vector<int>> combinationSum(vector<int>& nums, int target) {
-        
-        vector<vector<int>> ans;
-        vector<int>validSet;
-        
-        solve(nums, 0, target, validSet, ans);
-        return ans;
+        vector<vector<int>> result;
+        vector<int>curr;
+        generateCombination(0, nums, target, curr, result);
+        return result;
     }
 };
