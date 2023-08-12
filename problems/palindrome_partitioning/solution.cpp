@@ -1,46 +1,32 @@
 class Solution {
 public:
-    vector<vector<string>> partition(string s) {
-        
-        vector<vector<string>> ans;
-        vector<string>curr;
-        solve(s, 0, s.size()-1, curr, ans);
-        return ans;
-        
-    }
-    bool isPalindrom(string s, int start, int end)
-    {
-        while(start <= end)
-        {
-            if(s[start] != s[end])
-                return false;
-            start++;
-            end--;
-        }
-        
-        return true;
-    }
-    
-    void solve(string s, int start, int end, vector<string>&curr, vector<vector<string>> &ans )
-    {
-        if(start > end)
-        {
-            ans.push_back(curr);
+    void dfs(string str, int start, int end, vector<string>&curr, vector<vector<string>>&result){
+
+        if(start>end){
+            result.push_back(curr);
             return;
         }
-            
-        for(int i = start; i <= end; i++)
-        {
-            if(isPalindrom(s, start, i))
-            {
-                curr.push_back(s.substr(start, i - start + 1));
-                solve(s, i+1, end, curr, ans);
+
+        for(int i = start; i <= end; i++){
+            if(isPalindrom(start, i, str)){
+                curr.push_back(str.substr(start, i-start+1));
+                dfs(str, i+1, end, curr, result);
                 curr.pop_back();
             }
         }
-        
-        return;
     }
-    
-    
+    bool isPalindrom(int start, int end, string str){
+
+        while(start<=end){
+            if(str[start++]!=str[end--])
+                return false;
+        }
+        return true;
+    }
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> result;
+        vector<string> curr;
+        dfs(s, 0, s.size()-1, curr, result);
+        return result;
+    }
 };
