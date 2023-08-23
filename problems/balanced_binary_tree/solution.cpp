@@ -15,16 +15,19 @@ public:
         if(!root)
             return 0;
 
-        int leftHeight = maxDepth(root->left);
-        int rightHeight = maxDepth(root->right);
-
-        if(leftHeight == -1 || rightHeight == -1 || abs(leftHeight - rightHeight) > 1)
+        int left = maxDepth(root->left);
+        int right = maxDepth(root->right);
+        // See Notes for Logical explaination
+        if(left == -1 || right == -1 || abs(left - right) > 1)
             return -1;
-        return 1 + max(leftHeight, rightHeight);
+        
+
+        return 1 + max(left, right);
     }
     bool isBalanced(TreeNode* root) {
         if(root == NULL)
             return true;
+        
         return maxDepth(root) != -1;
     }
 };
