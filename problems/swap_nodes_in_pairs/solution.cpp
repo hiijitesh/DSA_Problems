@@ -10,41 +10,18 @@
  */
 class Solution {
 public:
-   ListNode* reverseLL(ListNode* head)
-    {
-        ListNode *prev = NULL;
-        ListNode *curr = head;
-        while (curr!=NULL)
-        {
-            ListNode * newNode = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = newNode;
-        }
-        return prev;
-    }
-    ListNode* swapNodePair(ListNode* head){
-          
+    ListNode* swapPairs(ListNode* head) {
         if(head == NULL)
             return NULL;
-        ListNode* currNode = head;
-        int currLen = 1;
-
-        while(currNode->next != NULL && currLen < 2){
-            currNode = currNode->next;
-            currLen++;
-        }
-        if(currLen < 2)
+        
+        if(head->next == NULL)
             return head;
-        ListNode* tempNode = currNode->next;
-        currNode->next = NULL;
-
-        ListNode* tempList = swapNodePair(tempNode);
-        ListNode* reversedList = reverseLL(head);
-        head->next = tempList;
-        return reversedList;
-    }
-    ListNode* swapPairs(ListNode* head) {
-      return swapNodePair(head);
+        
+        ListNode* temp = head->next;
+        // change the link of rest of the LL after two node
+        head->next = swapPairs(temp->next);
+        temp->next = head;
+        return temp;
+    
     }
 };
