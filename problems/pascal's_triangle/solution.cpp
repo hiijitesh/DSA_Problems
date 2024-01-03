@@ -1,22 +1,16 @@
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
-        vector<vector<int>>r(numRows);
-        
-        for(int i=0; i<numRows;i++){
-            //keeping number of rows equal to number of column
-            r[i].resize(i+1);
-            //intializing 1st and 2nd element of a row with one
-            r[i][0]=r[i][i]=1;
-        
-            //travering the 1st colmn to 2nd last colmn
-            for(int j=1;j<i;j++){
-                r[i][j]=r[i-1][j-1]+r[i-1][j];
-            }
-           
+        if(numRows == 0) return {};
+        if(numRows == 1) return {{1}};
+        vector<vector<int>> prevRow = generate(numRows-1);
+        vector<int> newRow(numRows,1);
+
+        for(int j = 1; j < numRows-1; j++){
+            newRow[j] = prevRow.back()[j-1] + prevRow.back()[j];
         }
-         //returning the row of pascal triangle
-        return r;
+        prevRow.push_back(newRow);
+        return prevRow;
         
     }
 };
