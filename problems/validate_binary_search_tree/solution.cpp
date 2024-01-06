@@ -11,26 +11,21 @@
  */
 class Solution {
 public:
-    bool checkBST( TreeNode* root , vector<long long> &prev){
-        
+    bool checkBST(TreeNode* root, vector<long long> &prev){
         if(root == NULL) return true;
         
-        bool leftSide = checkBST( root->left, prev);
+        bool isLeftBST = checkBST(root->left, prev);
         
         if(root->val <= prev[0]) return false;
+        prev[0] = root->val;
         
-        prev[0]=root->val;
-        
-        bool rightSide = checkBST( root->right, prev);
-        
-        return leftSide && rightSide;
-        
+        bool isRightBST = checkBST(root->right, prev);
+        return isLeftBST && isRightBST;
     }
     bool isValidBST(TreeNode* root) {
         
-        vector<long long> vec (1,-99999999999999L);
-        
-        return checkBST(root, vec);
+         vector<long long> prev (1,-99999999999999L);
+        return checkBST(root, prev);
         
     }
 };
