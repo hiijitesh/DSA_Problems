@@ -16,7 +16,6 @@ public:
             if(mp.find(match) != mp.end()){
                 // cout<<"INSIDE"<<" ";
                 mp[match]--;
-                cout<<mp[match];
                 
             }
         }
