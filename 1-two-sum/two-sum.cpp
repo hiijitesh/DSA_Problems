@@ -1,19 +1,22 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
+        // array is not sorted so cant use two pointer
+        // brute for
+
         unordered_map<int, int> mp;
 
         for(int i = 0; i < nums.size(); i++){
+            
+            int rem = target - nums[i];
+
+            if(mp.find(rem) != mp.end()){
+                return {mp[rem], i};
+            }
+
             mp[nums[i]] = i;
         }
 
-        for(int i = 0; i < nums.size(); i++){
-            int currNum = target - nums[i];
-            if(mp.find(currNum) != mp.end() && i != mp[currNum] ){
-              return {i, mp[currNum]};
-            }
-            
-        }
         return {};
     }
 };
