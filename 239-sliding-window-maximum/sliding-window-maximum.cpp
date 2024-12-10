@@ -8,13 +8,13 @@ public:
         if(k>nums.size()){
         ans.push_back(*max_element(nums.begin(),nums.end()));
         return ans;
-    }
+        }
+
         deque<int> q;
 
         int i = 0, j = 0;
         while(j < nums.size()){
-            //check if curr element is greater than the front of q
-
+            //check if curr element is greater than the back of q
             while(q.size()>0 && q.back()<nums[j]){
                 q.pop_back();
             }
@@ -28,7 +28,7 @@ public:
                 //calculate ans
                 ans.push_back(q.front());
 
-                //slide the windows
+            //slide the windows
             //check arr[i] is include in q.front() the remove it
                 if(nums[i] == q.front())
                     q.pop_front();
