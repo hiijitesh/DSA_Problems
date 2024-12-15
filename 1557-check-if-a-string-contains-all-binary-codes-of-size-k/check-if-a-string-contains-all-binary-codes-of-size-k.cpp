@@ -12,7 +12,7 @@ public:
             // cout<<"SubString: "<<currStr<<" "<<endl;
             if(st.find(currStr) == st.end()){
                 if(currStr.size()==k){
-                 st.insert(currStr);
+                    st.insert(currStr);
 
                 }
             }
