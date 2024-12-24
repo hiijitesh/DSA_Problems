@@ -1,13 +1,22 @@
 class Solution {
 public:
     bool isPerfectSquare(int num) {
-        int i = 1;
+        int start = 0, end = num;
 
-        while(num > 0){
-            num -= i;
-            i += 2;
+        while(start <= end){
+            long mid = (start+end)>>1;
+
+            long prod = mid*mid;
+
+            if(prod == num){
+                return true;
+            }
+            else if(prod > num){
+                end = (int)mid -1;
+            }else{
+                start = (int)mid+1;
+            }
         }
-
-        return num == 0;
+        return false;
     }
 };
