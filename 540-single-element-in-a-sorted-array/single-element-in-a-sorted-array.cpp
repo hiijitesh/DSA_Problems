@@ -11,9 +11,7 @@ public:
              mid = start + ((end - start)>>1);
             //  cout<<"MID=> "<<mid<<" "<<endl;
             if(mid & 1) mid--;
-
             
-
             if(nums[mid] == nums[mid+1]){
                 start = mid+2;
             }else{
