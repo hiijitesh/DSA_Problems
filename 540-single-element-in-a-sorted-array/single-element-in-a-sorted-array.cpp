@@ -9,7 +9,7 @@ public:
         while(start <= end){
 
              mid = start + ((end - start)>>1);
-             cout<<"MID=> "<<mid<<" "<<endl;
+            //  cout<<"MID=> "<<mid<<" "<<endl;
             if(mid & 1) mid--;
 
             
